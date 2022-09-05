@@ -2,7 +2,7 @@ name: build-and-push-guess-app
 on: [push]
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout source code from git repository
         uses: actions/checkout@v3
@@ -16,13 +16,13 @@ jobs:
       - name: Print working directory
         run: pwd
       - name: Create artifact directory
-        run: mkdir ~/artifact
+        run: mkdir artifact
       - name: Build
-        run: go build -o ~/artifact
+        run: go build -o artifact
       - name: Show build
-        run: ls -l ~/artifact
+        run: dir artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: ~/artifact
+          path: artifact
