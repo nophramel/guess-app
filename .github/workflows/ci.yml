@@ -1,0 +1,28 @@
+name: build-and-push-guess-app
+on: [push]
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code from git repository
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+
+        with:
+          go-version: '1.18'
+      - name: Show go version
+        run: go version
+      - name: Print working directory
+        run: pwd
+      - name: Create artifact directory
+        run: mkdir ~/artifact
+      - name: Build
+        run: go build -o ~/artifact
+      - name: Show build
+        run: ls -l ~/artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: ~/artifact
